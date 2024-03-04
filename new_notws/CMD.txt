@@ -1,0 +1,154 @@
+Copy to clipBorad
+---  ipconfig | clip
+
+
+For hiding the Files 
+Attrib +h +s +r tush
+Attrib -h -s -r tush
+
+help color 
+color number(type number)
+
+F7 to check history 
+
+
+to get whatever  product install 
+wmic product get name
+
+chnaging the Prompt 
+help prompt
+prompt Nobita@Shizuka$$
+
+
+CLI(commant line linterface) 
+GUI(grafical user interface)
+
+systeminfo (info about system)
+
+cls (clear screen)
+
+time
+date 
+
+slmgr -dli ( to check licence status )
+winver (windows version )
+ver 
+exit
+
+cd -- chnage directoy 
+dir  --  list of directoy
+mkdir -- make the directoy
+rmdir -- remove the directoy
+move -- move the directory/file
+ren -- rename the file /directory/file
+copy -- copy the file copy filename path 
+del -- deleteing the file 
+charmap 
+type nul> filename -- creating  any  extention file 
+
+
+echo -- showthe message or store
+echo hello 
+calc -- open calculator 
+tree --- fomat of file 
+
+start web site 
+
+sfc -- use in administetor only 
+
+shutdown 
+
+
+desk.cpl  -- destop control pannel 
+
+tasklist--
+taskkill--
+
+mstsc -- remote desktop connection 
+powercfg /? ---
+powercfg /filename
+
+
+msinfo32 -- syetem information 
+getmac 
+net 
+
+sdclt  -- backup
+ cleanmgr --- clean recyclebin file 
+dxdiag -- trubelshoot porblem 
+vol 
+
+hdwwiz  -- to install software (hdwizard)
+
+ftype -- file type mapping show 
+assoc --  to see the file extention 
+ 
+set 
+
+diverquery
+
+telnet towel.blinkenlights.nl  -- for star war movie 
+
+
+
+
+
+
+
+
+
+
+
+Host Name:                 PUNITP376376L
+OS Name:                   Microsoft Windows 11 Enterprise
+OS Version:                10.0.22000 N/A Build 22000
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Member Workstation
+OS Build Type:             Multiprocessor Free
+Registered Owner:          Windows User
+Registered Organization:   Infosys
+Product ID:                00329-00000-00003-AA938
+Original Install Date:     12/6/2022, 4:13:11 PM
+System Boot Time:          10/17/2023, 6:04:14 PM
+System Manufacturer:       HP
+System Model:              HP ProBook 445R G6
+System Type:               x64-based PC
+Processor(s):              1 Processor(s) Installed.
+                           [01]: AMD64 Family 23 Model 24 Stepping 1 AuthenticAMD ~2100 Mhz
+BIOS Version:              HP R79 Ver. 01.11.00, 4/16/2020
+Windows Directory:         C:\WINDOWS
+System Directory:          C:\WINDOWS\system32
+Boot Device:               \Device\HarddiskVolume1
+System Locale:             en-us;English (United States)
+Input Locale:              en-us;English (United States)
+Time Zone:                 (UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi
+Total Physical Memory:     14,269 MB
+Available Physical Memory: 2,241 MB
+Virtual Memory: Max Size:  25,043 MB
+Virtual Memory: Available: 3,676 MB
+Virtual Memory: In Use:    21,367 MB
+Page File Location(s):     C:\pagefile.sys
+Domain:                    ad.infosys.com
+Logon Server:              \\BLREXOGDC02
+Hotfix(s):                 7 Hotfix(s) Installed.
+                           [01]: KB5030650
+                           [02]: KB5030842
+                           [03]: KB5007575
+                           [04]: KB5011048
+                           [05]: KB5012170
+                           [06]: KB5031358
+                           [07]: KB5031591
+Network Card(s):           2 NIC(s) Installed.
+                           [01]: Realtek RTL8822BE 802.11ac PCIe Adapter
+                                 Connection Name: Wi-Fi
+                                 DHCP Enabled:    Yes
+                                 DHCP Server:     192.168.1.1
+                                 IP address(es)
+                                 [01]: 192.168.1.36
+                                 [02]: fe80::ec76:d094:21ce:ddc1
+                           [02]: Realtek PCIe GbE Family Controller
+                                 Connection Name: Ethernet
+                                 Status:          Media disconnected
+Hyper-V Requirements:      A hypervisor has been detected. Features required for Hyper-V will not be displayed.
+
+

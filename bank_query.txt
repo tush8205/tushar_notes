@@ -1,0 +1,21 @@
+select inv_id ,customer_id ,mutual fund flg from tbaadm.wigdt where  entity_cre_flg='Y',del_flg='N';
+
+select customer_id from tbaadm.wmcmg where entity_cre_flg='Y',del_flg='N';
+
+
+
+
+
+
+
+
+
+
+1.select bond code ,bond idinfire no bobm where entity flg =y del flg N
+2.select fundcode or id , isin from mffmt sam where
+3.select inv_id ,customer_id  from tbaadm.wigdt where  entity_cre_flg='Y',del_flg='N';
+4.select inv_id ,customer_id ,mutual fund flg,bond flg  from tbaadm.wigdt where  entity_cre_flg='Y',del_flg='N' and(mutual fund_flg=n or bond flg =n);
+5.
+select customer_id from tbaadm.wmcmg where entity_cre_flg='Y',del_flg='N';
+6.
+select customer_id from tbaadm.wmcmg where entity_cre_flg='Y',del_flg='N' and custid not in (select custid from custom.cbat)

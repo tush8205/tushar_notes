@@ -1,0 +1,441 @@
+ORACLE USED BY MOST OF THE FORTUNE 500 COMPANIES 
+ORACLE HOOLDS DBMS MARKET SHARE FIR THE SERVER SYSTEM 
+PL/SQL IS USED TO WRITE THE BUSINESS LOGIC AND PERFORM DATE OPERATION FOR MOST OF THESE APLLICATION 
+IN 1991 ORACLE CORPORATION DESIGNES PL/SQL- PROCEDURAL LANGAUNGE EXTENSION TO SQL 
+
+
+
+ Unlike SQL, PL/SQL is a proprietary procedural language of Oracle, developed to work only with Oracle products. 
+PL/SQL is majorly used for maintaining and enhancing the existing applications rather than new development.
+The business logic of the new applications using multi tier architecture is mostly developed in the business layer rather than the database.
+
+ORACLE DATABASES :: USED AS PERSISTENCE LAYER FOR THE APPLICATIO OF ANY DOMAIN LIKE FINACIAL SERIVES , MANUFATURING , REATAIL, INSURANCE , HELTHE CARE , COMMUNICATION AND ALSO USED AS DATABASES IN MANY OF THE ORACLE PRODUCT 
+U CAN USED PL/SQL TO PERFORM PROCESSING ON THE DATABASES SERVERS RATHER THAN CLIEENT OR MIDDELE TIER
+
+
+
+
+ variables :
+   datatypes 
+   
+    plsql datatypes are classified into scalar and composite datatypes 
+	 scalar types are used to store single values with no internal components 
+	  boolean ,,  PLS_INTEGER,BINARY_INTEGER ,REF CURSOR  , User-defined subtypes
+	 composite types :: are structured datatypes that have componets you can address indepndently .
+	 
+Numeric Datatypes
+PLS_INTEGER is used to store signed integers
+NUMBER(p,s) is mostly used for storing floating-point values but can even accommodate integer
+Character Datatypes 
+CHAR(n) is a fixed length character datatype. The precision is specified in integer which represents the number of bytes
+VARCHAR2(n) is a variable length character datatype
+Date and Time
+DATE is used for storing date and time. It stores the century, year, month, day, hour, minute, second. Fractional seconds are not available in this datatype
+TIMESTAMP stores the date and time details much like DATE datatype, and in addition, it also provides the sub-second details up to nine digits. The default precision is six digits of subseconds
+Boolean
+BOOLEAN is used for storing logical values such as TRUE, FALSE or NULL. It is mainly used to store the comparison results. Do not attempt to print or display the value stored in Boolean variable, as it is not possible.When assigning values to Boolean variables, do not enclose in quotes
+
+
+
+SQL and pricedural statements to run have to be written between the keyword begin and exception/end called as Executable section 
+INTO clause is used to collect select query results into the local varibale it is mandatory and occurs between the select and from clauses of a query 
+insert, update,and delete statements can be used as is in pl/sql programs
+you can use varibales in the expression of DML statements like , where clause or set clause of an update statement , where clause of a delete statement , values clause of insert statemnet 
+
+
+=-=-=-=-=-=--=--=-=-=-==-=-=-=--=--=-=-
+INTO clause is used in PL/SQL blocks to collect SELECT query results into a local variable.The INTO clause is mandatory and occurs between the SELECT and FROM clauses.
+There must be a variable corresponding to all the columns retrieved by SELECT statement and their corresponding datatype must match.
+The form of the SELECT statement discussed here will result in an error if SELECT returns more than one record. Later in this course we will see how to retrieve multiple rows from SELECT statement.
+====================================================
+EXIT STATEMNETS:
+EXIT statement forces a loop to complete unconditionally. When an EXIT statement is encountered, the loop completes immediately and control passes to the next statement.
+EXIT-WHEN statement lets a loop complete conditionally. When the EXIT statement is encountered, the condition in the WHEN clause is evaluated. 
+If the condition is true, the loop completes and control passes to the next statement after the loop.
+
+===============================
+LOOPS
+1. SIMPLE LOOPS
+    BEGIN
+   LOOP  
+        STATEMENT 1;
+             .
+             .
+        STATEMENT N;
+        EXIT WHEN CONDITION; 
+   END LOOP;
+END;
+Use this loop when
+You are not sure how many times 
+you want the loop to execute
+You want the loop body to run at least once
+
+2. WHILE LOOP 
+  BEGIN
+   WHILE CONDITION
+   LOOP  
+        STATEMENT 1;
+             .
+             .
+        STATEMENT N; 
+   END LOOP;
+END;
+Use this loop when
+You are not sure how many times you want the loop to execute
+You want to conditionally terminate the loop
+You don't have to execute loop body even one time 
+
+
+3 .NUMBRICAL FOR LOOP 
+  BEGIN
+   FOR <loop_counter> IN [REVERSE] <lower_limit number> .. <upper_limit number>
+   LOOP  
+        STATEMENT 1;
+             .
+             .
+        STATEMENT N; 
+   END LOOP;
+END;
+Use this loop when
+You want to execute  a body of loop a fixed number of times and do not want to halt the looping prematurely
+The body of the loop executes once for every integer value between the lower_limit and upper_limit 
+
+===================================================================
+%TYPE
+ANCHORED declaration :
+
+It is used to set the datatype of your variable based on the datatype of an already defined variable or a column of a table.
+PL/SQL offers two kinds of anchoring:
+Scalar anchoring - Use the %TYPE attribute to define your variable based on a table's column or an already declared PL/SQL scalar variable.
+Record anchoring - Use the %ROWTYPE attribute to define your record structure based on a table or a predefined PL/SQL explicit cursor.
+                      it should be fetch entire row 
+					  here we can used ( select *  into decl_vari from table name where condi;)
+
+ =========================================================================================================
+ EXCEPTION HANDLING (RUNTIME ERROR )
+ NORMALLY RAISED IN EXECUTABLE SECTION OF THE PL/SQL BLOCK . WHEN AN EXCEPTION IS RAISED , EXECUTION OF THE CURRENT VLOCK IS TERMINATED . 
+ THE STATEMENTS PRESENT AFTER THE ERRROR STATEMENT WILL NOT BE EXECUTED 
+  2 scenario 
+   1.If the exception is handled, then the actions specified in the exception handler section is executed and PL/SQL block terminates successfully
+   2.If exception is not handled, then the block terminates with failure and the exception propagates to the calling environment
+exception is used as a keyword 
+**
+predefined exception are those exception that are :
+
+  1.predefined in oracle server with an exception nmae and an oracle error code 
+  2.they are raised implicitly by orcale sever
+  3.handled using thier standard name 
+  
+ORA-140 == NO_DATA_FOUND == SELECT STATEMENT MATCHES NO ROWS
+ORA-1422 == TOO_MANY_ROWS == SLECT STATEMENTMATCHES MORE THAN ONE ROW
+ORA-0001 == DUP_VAL_ON_INDEX === UNIQUE CONSTRAINT IS VIOLATED
+ORA-1476 == ZERO_DIVIDE == division by zero 
+ORA-6502 == VALUE_ERROR == AN ARITHMETIC , CONVERSION , TRUNCATION , OR SIZE CONSTRAINT ERROR OCCURS IN PL/SQL
+ORA-1722 == INVALID_NUMBER == CONVERSION OF A CHARCTER STRING INTO A NUMBER IN SQL 
+
+when other exception handler ::
+
+it is not possible for you to detect all the possible errors that can occur in your code and handle it. This can be handled using WHEN OTHERS exception handler.       
+1.It should be the last clause, so that all previous handlers will be scanned first
+2.It handles the exceptions which are not handled by any other WHEN clauses defined in the exception section
+3.Only one WHEN OTHERS clause is allowed in a PL/SQL block
+4.It should be placed at the outermost block so that no errors go undetected or else the error will propagate to the calling environment
+
+##
+1.SQLCODE :: function return the error code of the raised exception 
+2. SQLERRM :: function return the error code of the raised exception alomg with the message associated with that error code 
+
+
+## USER DEFINED EXCEPTION::
+ declare , raised , handled using the same name . such exception are called as user-defined exception 
+ 
+ User defined Exception have to be :
+  1. Declared in the declaration section 
+  2. Explicitly raised using RAISE statement 
+  3. Handlwd in exception handling section using the name 
+  
+/*
+DECLARE
+  e_user_error EXCEPTION; --Declaring an exception
+BEGIN
+  RAISE e_user_error; --Raising an exception
+EXCEPTION
+WHEN e_user_error THEN --Handling an exception
+  ...
+END;
+*/
+
+
+RAISE_APPLICATION_ERROR :
+helps you to raise uner defined exception similar to predefined exception. i.e with an error number and an exception name 
+syntax to invoke ::
+--RAISE_APPLICATION_ERROR(error_number, error_message);
+
+
+Where error_code is an integer in the range -20000 and -20999 and the error_message is a character string not more than 512 characters.
+	1.Can be handled by WHEN OTHERS exception clause
+	2.Implicit rollback happens whenever this built-in function is executed, provided WHEN OTHERS exception clause is absent
+	3.Can be used both in the executable part as well as the exception handling part
+	
+
+TRANSACTION PROCESSING IN PLSQL:
+
+COMMIT, SAVEPOINT and ROLLBACK commands are used to control transactions.
+COMMIT:  
+Commit statement makes the changes made in the current transaction permanent in database  
+The changes made are also visible to other users
+ROLLBACK:  
+This command helps to restore the state of the database (i.e, undo the changes made) to a savepoint or to the last commit point
+SAVEPOINT:
+This command is used to name and mark a current point in the transaction
+This lets you rollback (undo) a part of transaction instead of rolling back the whole transaction	
+
+
+===============================================================================================================
+syntax for creating a stored function 
+CREATE  [OR REPLACE ] FUNCTION function_name [ ( parameter [ , parameter ]... ) ] 
+RETURN datatype 
+{IS | AS} 
+   [ local declarations ] 
+BEGIN 
+   executable statements 
+[ EXCEPTION 
+   exception handlers ] 
+END [ name ];
+
+=================================================================
+
+STORED FUNCTION 
+A stored function can be invoked from SQL statements only if the functions follow the below:
+The stored function should accept only IN parameters (you will learn parameter modes later in this course)
+The function should accept only SQL datatypes as parameters. The return datatypes should be only SQL datatypes
+The stored functions should not contain DML (INSERT, DELETE or UPDATE) statements
+If the stored function is invoked from an UPDATE or DELETE statement, the stored function cannot perform a SELECT on the same table
+The stored functions should not contain COMMIT or ROLLBACK
+
+STORED function and                    STORED procedure
+1.used for computation                  used to perform action 
+
+2.should return a single value          it cannot return values explicitly , but can return multiple 
+                                         values through out parameters
+3.it can be invoked from                it cannot be invoked from sql expression
+  sql expression   
+4. it must contain a return statement  it can contain a return statement but can't return a value . 
+    to return a value                   in stored procedure the return is used to end the exception of the prodeure
+
+
+
+*** drop function
+DROP FUNCTION <function_name>;
+
+** drop procedure
+DROP PROCEDURE <procedure_name>;
+
+
+** default value in IN parameter:
+default value can be assigned only to IN parameter that are used when actual parameter values are not passed
+
+
+**Parameter Passing Technique
+  1.Positional Notation :The actual parameters are associated with the formal parameters by position
+     sp_add_region(6,'Australia',v_status);
+   
+   
+   2.Named notation :  The formal parameters and the actual parameter are both included for each parameter. The order of parameters can be rearranged, if desired
+       sp_add_region(p_region_name=>'Australia',p_status=>v_status,p_region_id=>6);
+   
+   
+    3.Mixed Notation:The first parameters should be specified using positional notation and the remaining parameters can be specified using named notation. The reverse is not allowed 
+	    sp_add_region(6,p_status=>v_status,p_region_name=>'Australia');
+
+
+**Sequence ::
+  Sequence is a database object that is used to generate unique numbers. 
+      It can be used for generation of primary key values.
+  Sequence numbers are generated independently of tables, so the same sequence can be used for one or multiple tables.
+     
+     ##sequence syntax
+   create sequence <sequence_name>
+  [START WITH <integer>]
+  [INCREMENT BY <integer>]
+  [MAXVALUE <integer>] 
+  [MINVALUE <integer>]
+  [CACHE <integer> | NO CACHE]
+  [CYCLE | NO CYCLE];
+  
+  
+  
+ Once a sequence is created, to retrieve the next value of the sequence use NEXTVAL 
+   SELECT seq_region_id.NEXTVAL FROM dual;
+ 
+  to retrieve the current value of the sequence use CURRVAL
+     SELECT seq_region_id.CURRVAL from dual;
+
+
+
+**TRIGGER (U TRACK ON CHANGES)
+  A Trigger is a stored PL/SQL program unit, which gets implicitly fired by Oracle Database when a triggering event occurs. 
+  A Trigger defines an action, which should get executed, when some database related event occurs.
+
+
+**TRIGGERING EVENT ::An SQL statement which causes a trigger to be fired. 
+                     Every triggering event is associated with trigger timing i.e.,
+                     when a trigger should execute. According to trigger timing, triggers can be either before or after triggers. 
+Before INSERT or After INSERT
+Before UPDATE or After UPDATE
+Before DELETE or After 
+
+Trigger constraint (Optional): A Boolean expression which must be TRUE for the trigger to be fired.
+								We can add triggering constraint by using a WHEN clause in trigge
+								
+Trigger action: Is a PL/SQL code which contains what needs to be done when a trigger is fired.
+
+
+
+SYNTAX
+CREATE [OR REPLACE] TRIGGER  <trigger-name> BEFORE | AFTER | INSTEAD OF
+DELETE | [OR] INSERT | [OR] UPDATE [ OF <column> [, <column>...]] ON <table>
+ 
+-- This section is called Triggering event
+ 
+[ FOR EACH ROW [ WHEN  <condition>] ]
+ 
+-- When clause will be triggering constraint
+BEGIN
+ 
+-- This PL/SQL block is Triggering action
+ 
+/* PL/SQL Block */
+...
+END;
+
+///////////////////////////////////
+ROW TRIGGER 
+ NEW ROW INSERTED IN TRIGGER TABLE  WHEN TRIIER IS FIRED 
+ THESE KIND OF TRIGGERS ARE CALLED ROW TRIGGERS
+
+
+ These row triggers will have two pseudo records to get data from triggering event (INSERT, UPDATE, DELETE).
+OLD: references the OLD row before UPDATE or DELETE.
+NEW: references the NEW row after INSERT or UPDATE.
+
+ 
+ 
+ 
+ 
+ =========================================================================
+ CURSOR:
+ explicit
+ ** cursor attribute:
+    %ISOPEN = Boolen == Evaluate to True if the cursor is open 
+	%NOTFOUND = BOOLEAN == Evaluate to true if the most recent fetch does not return a row 
+	%FOUND = BOOLEAN == Evaluates to true if the most recent fetch return a row .
+	                    complemnet of %NOTFOUND
+	%ROWCOUNT = Number == gives total number of rows returned  so far 
+	
+	
+implicit
+**
+   SQL%ROWCOUNT = Number of record affected by th most recent SQL statement
+   SQL%FOUND = Evaluates to true if the most recent SQL statement affect one or more rows 
+   SQL%NOTFOUND = Evalutes to TRUE if the most recen same sql statement does not affect any rows
+   SQL%ISOPEN = always evaluates to false because pl/sql implicit cursors 
+                 immediately after they are executed 
+			
+			
+			
+PL/SQL supports three different kinds of records:
+       1. Table-based record : (table_name % rowtype)
+                 Based on a table's column structure.
+				 Record will have same number of fields as columns in table and each field in record has the same name as a column in a table
+	    2.Cursor-based record :(cursor_name % rowtype)
+					Based on the cursor's SELECT statement.Record will have same number of fields as column or expression in the cursor SELECT 
+					statement and each field in record has the same name as column or expression in the cursor SELECT statement.
+        3.Programmer-defined record : 
+                    Based on the structure defined by programmer .Each field is defined explicitly (its name and datatype) in the TYPE statement
+
+**PACKAGES ( DOT OPERATOR IS USED TO ACCESS THE PACKAGE CONTENTS)
+One thing to remember is that a package itself is not any kind of executable 
+piece of code. Instead, it is a repository for code that is executed or used. When you use a package, you actually execute or make reference to an element in a package
+PACKAGE SPECIFICSTION :
+  y must know what is defined and availabe inside the package , this info is contained in the package specification
+   it contain the definition or specification of all the elements (type ,varibel ,constants cursorand subprograms),
+   in the package that may be referenced outside of the package. These are called the public elements of the package.
+
+PACKAGE BODY :
+The package body should contain the implementation of every subprogram declared in the package specification. Subprograms defined
+ in a package body are accessible outside the package only if their specs also appear in the package specification. 
+
+The package body can also contain types, variables and subprograms necessary for the internal workings of the package.
+ These are called private elements which can be referenced only within the package body and not outside the package.
+
+
+PACKAGE SPECIFICSTION**
+VARIABLES   ==public variable 
+Procedure A declaration  == public procedure
+
+
+PACKAGE  BODY 
+VARIABLES       == PRIVATE VARIABLES
+Procedure B DEFINITION == PRIVATE PROOCEDURE
+FUNCTION C DEFINATION == PRIVATE FUNCTION
+PROCEDURE A DEFINITION == PUBLIC PROCEDURE 
+     VARIABLES       == LOCAL VARIABLE 
+	 
+	PACKAGE SPECIFICSTION::SYNTAX 
+	 CREATE [OR REPLACE] PACKAGE pkg_package_name
+IS|AS
+   [constant_declaration ...]
+   [variable_declaration ...]
+   [cursor_spec ...]
+   [function_spec ...]
+   [procedure_spec ...]
+END [pkg_package_name];
+
+
+    PACKAGE BODY ::SYNTAX
+CREATE [OR REPLACE] PACKAGE BODY pkg_package_name
+IS|AS
+   [constant_usage ...]
+   [exception_usage ...]
+   [variable_usage ...]
+   [cursor_body ...]
+   [function_body ...]
+   [procedure_body ...]
+END [pkg_package_name]; 
+
+NOTE ::A package specification can exist without a package body, called bodiless package,
+        but the package body cannot exist without a package specification.
+		
+		
+Types Of PACKAGES::
+		 Oracle provided built-in packages - installed by default when you create a database instance
+         Pre-built packages - written by a third party and made available to you for inclusion in your applications
+         Build-your-own package - defined by the developer specific to the appliction
+		 
+		 
+		 
+ **Types OF COLLECTION:
+ VARRAY - Use it when you need to store a predefined volume of data
+          TYPE type_name IS {VARRAY | VARYING ARRAY} (size_limit) OF element_type [NOT NULL];
+
+ NESTED TABLES- use use it when you need to store large amount of data with no restriction on the max size of the collection
+ Associative Arrays-use it when you need to store values in key-value pairs with no restriction on the max size of the collection
+
+-=--=-=-=-=-=-=-=--==--=--=-=---=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=
+BULK COLLECTION
+Bulk Collect is used to fetch multiple rows into one or more collections in a single round trip to and from the database.
+This is one type of bulk processing. This reduces the number of context switches between SQL and PL/SQL which makes the 
+  data retrieval faster and improves the performance.
+  This is implemented by using BULK COLLECT keyword before INTO clause of select statement in PL/SQL
+  
+  
+  
+  
+DATA DICTIONARY::
+most imp components of the oracle DBMS.
+data stored in the data dictionary is called metadata .
+it is usually the domain of databases adminidtrators (DBAs)
+
+
+=======================================================================================================================

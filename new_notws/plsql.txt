@@ -1,0 +1,761 @@
+select employee_id, first_name,salary ,sf_tax_calc(employee_id) as tax_amount from 
+employees where sf_tax_calc(employee_id)>1000;
+
+/
+declare
+ v_status number(1,0);
+begin
+ sp_add_job ('SL_REP','Sales Representative',4000,8000,v_status);
+ sp_add_job ('SL_MAN','Sales Manager',3000,5000,v_status);
+ sp_add_job ('PU_MAN','Purchasing Assistant Manger',9500,20000,v_status);
+ sp_add_job('SL_ASSISTANT','sales Assistant Manger',7000,13000,v_status);
+if v_status=0 then 
+  DBMS_OUTPUT.PUT_LINE('new job added successful');
+  elsif v_status=-1 then 
+   dbms_output.put_line('job_id  already exists');
+   else 
+    dbms_output.put_line('some error occured');
+    end if;
+    end;
+    /
+    select * from jobs ;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	=-=-===========================================
+	DECLARE
+  v_region_id regions.region_id%TYPE := 6;
+  v_region_name regions.region_name%TYPE := 'Australia';
+  v_status NUMBER(1);
+BEGIN
+  sp_add_region(v_region_id,v_region_name,v_status);
+  IF v_status=0 THEN
+    DBMS_OUTPUT.PUT_LINE('Insert successful');
+  ELSIF v_status=-1 THEN
+    DBMS_OUTPUT.PUT_LINE('Region id already exist');
+  ELSIF v_status=-2 THEN
+    DBMS_OUTPUT.PUT_LINE('Region name already exist');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Some error occurred');
+  END IF;
+END;
+
+
+/
+
+declare 
+ v_employee_id employees.employee_id%type:=100;
+ v_bonus_amount number(8,2);
+ begin 
+  v_bonus_amount:= sp_bonus_amount(v_employee_id);
+  dbms_output.put_line('bonus amount is '|| v_bonus_amount);
+  end;
+  
+  
+  /
+  
+  declare 
+  v_region_id regions.region_id%type:=6;
+  v_region_name regions.region_name%type:='Australia';
+  v_status number(1);
+  begin
+   sp_add_region(v_region_id,v_region_name,v_status);
+   if v_status=0 then 
+    dbms_output.put_line('INsert successful');
+   elsif v_status = -1 then 
+   dbms_output.put_line('region id already exist');
+   elsif v_status = -2 then 
+    dbms_output.put_line('region name already exist ');
+    else 
+    dbms_output.put_line('some error occurred');
+    end if ;
+    end;
+  
+  
+  
+  
+  
+  
+
+
+/
+
+declare 
+ v_employee_id employees.employee_id%type:=100;
+v_bonus_amount number(8,2);
+v_bonus_percentage number(5,2):=50;
+begin 
+ v_bonus_amount:=sp_bonus_amount(v_employee_id,v_bonus_percentage);
+ dbms_output.put_line('Bonus amount is '||v_bonus_amount);
+ end;
+
+
+
+=============================================================================
+create table emp_salary_log
+( 
+ employee_id number(6),
+ modified_time TIMESTAMP,
+ old_salary number(6),
+ new_salary number(6),
+ user_name varchar2(30)
+ )
+ 
+ /
+ select employee_id,salary,job_id from employees where job_id='AD_ASST';
+ /
+ UPDATE EMPLOYEES SET SALARY = SALARY*1.1 WHERE JOB_ID='AD_ASST';
+ /
+ SELECT EMPLOYEE_ID , SALARY,JOB_ID FROM EMPLOYEES WHERE JOB_ID = 'AD_ASST';
+ /
+ SELECT EMPLOYEE_ID,MODIFIED_TIME,OLD_SALARY,NEW_SALARY,USER_NAME FROM EMP_SALARY_LOG;
+ 
+ /
+ 
+  select employee_id,salary,job_id from employees where job_id='IT_PROG';
+  /
+ UPDATE EMPLOYEES SET SALARY = SALARY*1.1 WHERE JOB_ID='IT_PROG';
+ /
+ 
+ SELECT EMPLOYEE_ID , SALARY,JOB_ID FROM EMPLOYEES WHERE JOB_ID = 'IT_PROG';
+
+ /
+ 
+ 
+  SELECT EMPLOYEE_ID,MODIFIED_TIME,OLD_SALARY,NEW_SALARY,USER_NAME FROM EMP_SALARY_LOG;
+/
+SELECT * FROM EMP_SALARY_LOG;
+
+/
+
+select min_salary from jobs where job_id ='IT_PROG';
+/
+INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME,EMAIL,HIRE_DATE ,SALARY,JOB_ID,DEPARTMENT_ID)
+VALUES 
+(1001,'JACK','WALNEY','JWALNEY','23-JAN-2015',1500,'IT_PROG',90);
+
+/
+
+
+SELECT SALARY FROM EMPLOYEES WHERE EMPLOYEE_ID =1001;
+
+/
+
+======================================================================
+declare
+ cursor cur_emp_in_dept
+  is 
+   select employee_id ,salary,hire_date  from employees where 
+   department_id=50;
+   v_emp_id employees.employee_id%type;
+   v_salary employees.salary%type;
+   v_hire_date employees.hire_date%type;
+   begin
+    open cur_emp_in_dept;
+    loop 
+    fetch cur_emp_in_dept into v_emp_id,v_salary,v_hire_date;
+    exit 
+   when cur_emp_in_dept%notfound;
+    dbms_output.put_line('employee Id :' || v_emp_id);
+    dbms_output.put_line ('Salary: '|| v_salary );
+    dbms_output.put_line('Joning date :'|| v_hire_date);
+        dbms_output.put_line('----------------------------------');
+        end loop ;
+         close cur_emp_in_dept;
+         end ;
+  /
+  
+  declare 
+   cursor c_update_commision_pct
+    is 
+    select employee_id , salary from employees where job_id in('MK_REP','PR_REP');
+    v_emp_id employees.employee_id%type;
+    v_salary employees.salary%type;
+    v_commission_pct employees.commission_pct%type;
+    begin 
+    open c_update_commision_pct;
+     loop 
+      fetch c_update_commision_pct into v_emp_id,v_salary;
+      exit when c_update_commision_pct%notfound;
+      if v_salary>10000 then 
+       v_commission_pct :=0.1;
+       elsif v_salary>= 7000 and v_salary<=10000 then
+        v_commission_pct :=0.15;
+        else
+        v_commission_pct:=0.2;
+        end if ;
+        update employees set commission_pct = v_commission_pct where employee_id = v_emp_id;
+        end loop;
+        close c_update_commision_pct;
+        exception 
+         when others then
+          dbms_output.put_line('some error occcured');
+          end ;
+  
+  /
+  select commission_pct,salary from employees;
+  /
+  
+  declare 
+   v_department_id employees.department_id%type;
+   cursor cur_emp_in_dept is
+   select employee_id ,salary ,hire_date from employees where department_id = v_department_id;
+   v_emp_id employees.employee_id%type;
+   v_salary employees.salary%type;
+   v_hire_date employees.hire_date%type;
+   begin 
+   v_department_id := 20;
+   open cur_emp_in_dept;
+   loop
+   fetch cur_emp_in_dept into v_emp_id,v_salary,v_hire_date;
+   exit 
+   when cur_emp_in_dept%notfound;
+   dbms_output.put_line ('Employee Id :' || v_emp_id);
+   dbms_output.put_line ('Salary:'|| v_salary);
+   dbms_output.put_line('Joinoig date :' || v_hire_date);
+   dbms_output.put_line('=================================');
+   end loop ;
+    close cur_emp_in_dept;
+    end ;
+    
+  /
+  
+  DECLARE
+  v_department_id employees.department_id%TYPE := 20;
+  v_emp_id employees.employee_id%TYPE;
+  CURSOR cur_emp_in_dept
+  IS
+    SELECT employee_id FROM employees WHERE department_id = v_department_id;
+BEGIN
+  v_department_id := 30;
+  OPEN cur_emp_in_dept;
+  LOOP
+    FETCH cur_emp_in_dept INTO v_emp_id;
+    EXIT
+  WHEN cur_emp_in_dept%NOTFOUND;
+    DBMS_OUTPUT.put_line ('Employee ID: ' || v_emp_id);
+  END LOOP;
+  CLOSE cur_emp_in_dept;
+END;
+/
+
+
+  select employee_id ,department_id from employees;
+  
+  /  
+  
+  
+  
+  
+ declare 
+   cursor cur_emp_in_dept(p_department_id employees.department_id%type) is
+   select employee_id ,salary,hire_date from employees where department_id = p_department_id;
+   v_emp_id employees.employee_id%type;
+   v_salary employees.salary%type;
+   v_hire_date employees.hire_date%type;
+   begin 
+
+ open cur_emp_in_dept(20);
+   loop
+   fetch cur_emp_in_dept into v_emp_id,v_salary,v_hire_date;
+   exit 
+   when cur_emp_in_dept%notfound;
+   dbms_output.put_line ('Employee Id :' || v_emp_id);
+   dbms_output.put_line ('Salary:'|| v_salary);
+   dbms_output.put_line('Joining date :' || v_hire_date);
+   dbms_output.put_line('=================================');
+   end loop;
+    close cur_emp_in_dept;
+    end;
+    
+   /
+   
+declare 
+ v_department_id employees.department_id%type;
+ cursor cur_emp_in_dept
+  is 
+   select employee_id, salary,hire_date from employees where department_id = v_department_id;
+   rec_empInfo cur_emp_in_dept%ROWTYPE;
+BEGIN 
+ v_department_id :=20;
+ open cur_emp_in_dept;
+ loop
+  fetch cur_emp_in_dept INTO  rec_empInfo;
+  exit 
+   when cur_emp_in_dept%NOTFOUND;
+   DBMS_OUTPUT.PUT_LINE ('Employee ID : ' || rec_empInfo.employee_id|| ' salary : ' || rec_empInfo.salary || ' joinig_date:' || rec_empInfo.hire_date);
+   end loop;
+   close cur_emp_in_dept;
+   end;
+   
+   
+   /
+  declare
+   v_department_id employees.department_id%type;
+   cursor cur_emp_in_dept
+   is 
+   select employee_id ,salary,hire_date from employees where department_id =v_department_id;
+   begin
+    v_department_id:=20;
+    for rec_empInfo in cur_emp_in_dept
+    loop
+    dbms_output.put_line('Employee ID : '|| rec_empInfo.employee_id);
+    dbms_output.put_line('salary :'|| rec_empInfo.salary);
+    dbms_output.put_line('joinig date :'|| rec_empInfo.hire_date);
+    dbms_output.put_line('=============================================');
+    
+    end loop;
+    end;
+   
+   
+   /
+   
+   
+ set SERVEROUTPUT on  
+DECLARE
+   CURSOR c_emp_det (v_dept NUMBER)AS
+  
+      SELECT employee_id, salary, hire_date
+        FROM employees
+       WHERE department_id = v_dept;
+BEGIN
+   FOR v_emp IN c_emp_det (30) -- passing the parameter values (try with different department id's)
+   LOOP
+      DBMS_OUTPUT.put_line ('Employee_id: ' || v_emp.employee_id);
+      DBMS_OUTPUT.put_line ('salary:' || v_emp.salary);
+      DBMS_OUTPUT.put_line ('Joining date:' || v_emp.hire_date);
+   END LOOP;
+END;
+
+   /
+   
+   declare 
+   v_count Number;
+   begin
+    update employees set commission_pct = 0.1 where department_id = 20 ;
+    IF SQL%FOUND
+     THEN 
+      v_count := SQL%ROWCOUNT;
+      DBMS_OUTPUT.PUT_LINE('NUMBER OF ROWS AFFECTED :' || V_COUNT);
+      ELSE 
+     DBMS_OUTPUT.PUT_LINE('NO EMPLOYEE FOUND');
+     END IF ;
+      END;
+      /
+      
+declare
+ type type_emp_detail is record
+ (
+  employee_id number(6),
+  first_name varchar2(20),
+  last_name varchar2(25),
+  phone_number varchar2(20),
+  department_name varchar2(30)
+  );
+  rec_emp_detail type_emp_detail;
+  v_employee_id employees.employee_id%type :=105;
+  begin
+  select employee_id , first_name,last_name,phone_number,department_name
+  into rec_emp_detail from employees e , departments d
+  where e.department_id=d.department_id and e.employee_id = v_employee_id;
+  dbms_output.put_line('Employee ID :'|| rec_emp_detail.employee_id);
+  dbms_output.put_line('First Name :'||rec_emp_detail.first_name);
+  dbms_output.put_line('Last Name :'|| rec_emp_detail.last_name);
+  dbms_output.put_line('Depatment name :'||rec_emp_detail.department_name);
+  end ;
+  
+   /
+   declare 
+    v_department_id department.department_id%type:=50;
+    cursor cur_emp_details is 
+    select employee_id ,salary ,hire_date from employees where department_id = v_depatment_id;
+     rec_emp_detail cur_emp_details%rowtype;
+     begin 
+     open cur_emp_details;
+     loop
+      fetch cur_emp_details into rec_emp_detail;
+      exit when cur_emp_details%NOTFOUND;
+      dbms_output.put_line('Employee ID : ' || rec_emp_detail.employee_id);
+      end loop;
+      end;
+   
+   
+   
+   
+   
+   
+  
+  
+  
+  
+  
+  
+  
+  ================================================================================
+  CREATE OR REPLACE PACKAGE BODY pkg_Employee_Info
+IS
+  FUNCTION get_employee_Info(p_empID EMPLOYEES.EMPLOYEE_ID%TYPE)
+    RETURN EmpInfo -- return type is record type defined in the package
+  IS
+    rec_empInfo EmpInfo; -- declaring a variable of record type defined in the package
+  BEGIN
+    SELECT employee_id,first_name,phone_number,email,department_id INTO rec_empInfo
+    FROM employees WHERE employee_id = p_empID;
+    RETURN rec_empinfo; -- returning a record variable
+  EXCEPTION
+  WHEN OTHERS THEN
+    RETURN NULL;
+  END;
+  
+  FUNCTION get_Manager_Email(p_empID EMPLOYEES.EMPLOYEE_ID%TYPE)
+    RETURN VARCHAR2
+  IS
+    v_ManagerEmail EMPLOYEES.EMAIL%TYPE;
+  BEGIN
+    SELECT email INTO v_ManagerEmail
+    FROM employees WHERE employee_id =(SELECT manager_id FROM employees WHERE employee_id = p_empID);
+    RETURN v_ManagerEmail;
+  EXCEPTION
+  WHEN OTHERS THEN
+    RETURN NULL;
+  END;
+  
+  PROCEDURE update_Employee_PhoneNumber(
+      p_empID EMPLOYEES.EMPLOYEE_ID%TYPE,
+      p_New_Phone_Number EMPLOYEES.PHONE_NUMBER%TYPE,
+      p_status OUT NUMBER)
+  IS
+    v_ManagerEmail EMPLOYEES.EMAIL%TYPE;
+  BEGIN
+    UPDATE employees
+    SET PHONE_NUMBER  = p_New_Phone_Number
+    WHERE employee_id = p_empID;
+    p_status         := 0;
+  EXCEPTION
+  WHEN OTHERS THEN
+    p_status := -1;
+  END;
+END;
+/
+
+
+
+declare 
+ v_empID employees.employee_id%type :=103;
+ rec_employee_details pkg_employee_Info.empInfo;
+ begin
+  rec_employee_details:= pkg_employee_info.get_employee_info(v_empid);
+  dbms_output.put_line('Manager ID : '|| rec_employee_details.employee_ID);
+  dbms_output.put_line('Manager Name :'|| rec_employee_details.first_name);
+  dbms_output.put_line('Contact Number :'|| rec_employee_details.Phone_number);
+  dbms_output.put_line('Manager Email Id:'|| rec_employee_details.Emailid);
+  end;
+  
+  
+  /
+  declare 
+  Type type_region IS VARRAY(15) OF varchar2(25);
+  col_regions type_region :=type_region();
+  v_index_position number(2):=1;
+  begin 
+  for region in ( select region_name from regions)
+  loop
+   col_regions.extend(1);
+   col_regions(v_index_position):=region.region_name;
+   v_index_position := v_index_position +1;
+   end loop;
+    for v_index in 1..col_regions.COUNT
+    LOOP
+    dbms_output.put_line(v_index|| ' : '|| col_regions(v_index));
+    end loop ;
+    end ;
+    /
+    
+ declare 
+  TYPE type_marital_status IS VARRAY(4) of varchar2(25);
+  col_marital_status type_marital_status:=type_marital_status();
+  begin
+   col_marital_status.EXTEND(4);
+   col_marital_status(1):='Married';
+   col_marital_status(2):='Single';
+   col_marital_status(3):='Divorced';   
+   col_marital_status(4):='Widowed';
+   dbms_output.put_line('Element at index position 1 in collection:'||col_marital_status(1));
+   dbms_output.put_line('count of elements in collection:'|| col_marital_status.count);
+   end;
+/
+declare 
+ TYPE type_marital_status is varray(5) of varchar2(25);
+ col_marital_status type_marital_status := type_marital_status('Married','Single','Divorced','Widowed');
+ v_index_position number(2):=1;
+ 
+ 
+ begin 
+  for v_index_position in 1..col_marital_status.count
+  loop
+  dbms_output.put_line('Element on index'||v_index_position||' in collection:'
+   || col_marital_status(v_index_position));
+   end loop;
+   end ;
+    /
+
+ declare 
+ CURSOR cur_emp_details (v_manager_id employees.manager_id%type) is 
+     (select employee_id from employees where manager_id = v_manager_id);
+     type type_emp_details is table of number(6);
+     col_emp_details type_emp_details := type_emp_details();
+     v_index_position number(3):=1;
+     begin 
+      for v_emp_id IN cur_emp_details(100)
+      loop
+      col_emp_details.extend(1);
+      col_emp_details (v_index_position) :=v_emp_id.employee_id;
+      v_index_position := v_index_position +1;
+      end loop;
+      for v_index in 1 .. col_emp_Details.count
+      loop
+      dbms_output.put_line(v_index||' ' || col_emp_details(v_index));
+      end loop;
+      end;
+/
+
+
+
+Declare
+  TYPE type_region_detail IS RECORD
+  (
+   region_id Number(6),
+   region_name varchar2(20),
+   no_of_countries  number(2)
+   );
+ TYPE      
+
+type_region IS table of type_region_detail;
+col_regions type_region :=type_region();
+v_index_position number(2) :=1;
+begin 
+ FOR rec_region IN ( select r.region_id, r.region_name, count(c.country_id ) no_of_countries
+  from regions r , countries c where r.region_id = c.region_id group by r.region_id,r.region_name)
+  loop
+  col_regions.extend(1);
+  col_regions(v_index_position).region_id := rec_region.region_id;
+  col_regions(v_index_position).region_name:=rec_region.region_name;
+  col_regions(v_index_position).no_of_countries:=rec_region.no_of_countries;
+  v_index_position:=v_index_position+1;
+  end loop;
+  for v_index in 1..col_regions.count
+  loop
+  dbms_output.put_line('Region ID : '||' '|| col_regions(v_index).region_id);
+  dbms_output.put_line('Region Name : '||' ' || col_regions(v_index).region_name);
+  dbms_output.put_line('No of countries : '||''|| col_regions(v_index).no_of_countries);
+  dbms_output.put_line('======================================================================');
+  end loop ;
+   end;
+   
+   /
+   
+  declare 
+   cursor cur_MaxSal_Dep is (
+   select department_name,MAX (salary) max_sal from employees e,departments d 
+   where e.department_id = d.department_id group by department_name);
+   TYPE type_MaxSal_Dep IS table of number(8,2)
+   Index by departments.department_name%type;
+   col_MaxSal_Dep type_MaxSal_Dep;
+begin
+ for rec_deps IN cur_MaxSal_Dep
+ Loop
+ col_MaxSal_Dep(rec_deps.department_name):=rec_deps.max_sal;
+ end loop ;
+ dbms_output.put_line(col_MaxSal_Dep ('Administration'));
+ dbms_output.put_line(col_MaxSal_Dep('Marketing'));
+ dbms_output.put_line(col_MaxSal_Dep('Purchasing'));
+ end;
+ 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+===========================================
+create type type_contact_no as VARRAY (2) of number(10);
+/
+create table customer(
+customer_name varchar2(30),
+customer_contact_list type_contact_no );
+/
+insert into customer values ('joy',type_contact_no(7020202020,6363636363));
+/
+select * from customer;
+/
+declare 
+ col_contact_no type_contact_no := type_contact_no(7020202020,6363636363);
+ begin
+  dbms_output.put_line (col_contact_no(1));
+    dbms_output.put_line (col_contact_no(2));
+    end;
+    /
+    
+    declare 
+     type type_slots is varray (100) of number;
+     col_slots type_slots := type_slots(100,200);
+     begin
+     dbms_output.put_line('varray size :'||col_slots.limit);
+     dbms_output.put_line('varray count : '|| col_slots.count);
+     end;
+     /
+     DECLARE
+   TYPE type_slots IS VARRAY (100) OF NUMBER;
+   col_slots type_slots:= type_slots (100,200,300,400,500,600,700);
+BEGIN
+   col_slots.TRIM (4);
+   FOR v_index IN 1 .. col_slots.COUNT
+   LOOP
+      DBMS_OUTPUT.PUT (col_slots (v_index)||'  ');
+   END LOOP;
+   DBMS_OUTPUT.PUT_line ('');
+END;
+/
+
+declare
+ TYPE type_emp_details is table of number(6);
+ col_emp_details type_emp_details;
+ v_manager_id employees.manager_id%type := 103;
+ 
+ begin
+  select employee_id bulk collect into col_emp_details from employees where manager_id = v_manager_id;
+  dbms_output.put_line('Employees reportring to manager :'||v_manager_id);
+  for emp_id In col_emp_details.first .. col_emp_details.last
+  loop 
+  dbms_output.put_line(col_emp_details(emp_id));
+  end loop;
+  end;
+  
+  /
+  
+  DECLARE
+   TYPE type_dept_id IS TABLE OF NUMBER (6);
+   TYPE type_dept_name IS TABLE OF VARCHAR2 (30);
+   col_dept_id     type_dept_id;
+   col_dept_name   type_dept_name;
+BEGIN
+   SELECT department_id, department_name BULK COLLECT INTO col_dept_id,col_dept_name
+     FROM departments;
+   FOR i IN col_dept_id.FIRST .. col_dept_id.LAST
+   LOOP
+      DBMS_OUTPUT.put_line ('Department_id: ' || col_dept_id (i));
+   END LOOP;
+      FOR i IN col_dept_name.FIRST .. col_dept_name.LAST
+   LOOP
+      DBMS_OUTPUT.put_line ('Department_name: ' || col_dept_name (i));
+   END LOOP;
+END;
+
+/
+
+DECLARE
+   TYPE type_dept IS RECORD (
+   dept_id number(6),
+   dept_name varchar2(30)
+   );
+   TYPE type_dept_details IS TABLE OF type_dept;
+   col_dept_det    type_dept_details;
+BEGIN
+   SELECT department_id, department_name BULK COLLECT INTO  col_dept_det FROM departments;
+   FOR i IN  col_dept_det.FIRST ..  col_dept_det.LAST
+   LOOP
+      DBMS_OUTPUT.put_line ('Department_id: ' ||  col_dept_det (i).dept_id);
+      DBMS_OUTPUT.put_line ('Department_name: ' || col_dept_det  (i).dept_name);
+   END LOOP;
+END;
+/
+
+
+SELECT EMPLOYEE_ID , SALARY  FROM employees 
+ WHERE TO_NUMBER(TO_CHAR(SYSDATE,'YYYY')) - TO_NUMBER((TO_CHAR(HIRE_DATE,'YYYY'))) >=25;
+ 
+ /
+ 
+ 
+ DECLARE 
+  TYPE TYPE_EMP_DETAILS IS TABLE OF NUMBER(6);
+  COL_EMP_DETAILS TYPE_EMP_DETAILS;
+  V_hikepercentage number (3) := 10;
+  begin
+   select employee_id bulk collect into col_emp_details from employees
+    where to_number (to_char(sysdate,'yyyy')) - to_number((to_char(hire_date,'yyyy'))) >=25;
+    
+  FORALL emp_id in col_emp_details.first .. col_emp_details.last
+    update employees set salary = salary *(1+v_hikepercentage/100) where employee_id = col_emp_details(emp_id);
+    
+end;
+
+/
+
+SELECT employee_id,salary FROM employees 
+WHERE to_number(to_char(sysdate,'yyyy')) - to_number((to_char(hire_date,'yyyy'))) >= 25;
+
+/
+
+
+
+select * from dictionary;
+/
+select object_name , object_type
+ from user_objects
+  where object_type in ('procedure','function')
+  order by object_name;
+  /
+  
+  select text from user_source
+   where name = 'Procedure_name/Function_Name'
+   order  by line;
+  
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM EMPLOYEES;
+
+
+=================================================================================

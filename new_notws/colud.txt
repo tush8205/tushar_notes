@@ -1,0 +1,41 @@
+AWS CLOUD MITGRATION 
+CLOUD MIGATION : THE PROCESS OF TRANSFEEING DATA ,APPLI, WORKLOAD FROM ON PREMISES TO CLOUD 
+Operstional Costs :Operational Costs the  Costs of running your infrastucture 
+Workforce Productivity : Workforce prodectivity is how efficiently you are able to get yore service to market 
+Cost avoidance : Cost avoidance is setting up an enviremonet that does not  create unnessary costs
+Operational Resilience :Operational resilience is reducing your organization risk profile and the cost of risk migration 
+Business Agilit : ability to react quickly to changing market condition .You can expand into new markets , take products to market quickly
+
+MIGRATION STRATRIES : THE 6 R'S
+1. Re-host : lift and shift 
+2. Re-platform: lift , tinker and shift 
+3.Re - purcheas: Drop and shop 
+4.Re-factor / Re architect :Redesign , cloud native 
+5.Retain : Do nothinf fro now - revisit.
+6.Retire: Decommission or get rid of 
+
+
+
+
+
+
+
+
+
+VM IMPORT EXPORT 
+it enables you to import virtual machine images from your existing virtualization environment(On-prem, DC) to Amazon EC2 , and to export them back to your On-prem env .
+
+
+USES VM IMPORT EXPORT 
+Migrate Your existing application and workloads to amazon EC2
+import your VM image Catalog tom amazon EC2
+Create a Disaater Recovery Reposiorty for your VM image 
+
+WORKS 
+STEP
+1.EXPORT VM from its Current Encironment as an OVA file (or VMDK,VHD or RAW) if you are testing this makes sure the VM has at least one user confirgure with Password)
+2.Create a S3 Bucket and upload the VM image to S3 using upload/drag and drop or using AWS CLI
+3. Import your VM using the ec@ import image command
+4. Use the ec3 describe import image tasks commmand to monitor the import progress
+5.Once Import is completed Launch EC2 Inseance from the AMI created , or copy the AMI to other region 
+                                               

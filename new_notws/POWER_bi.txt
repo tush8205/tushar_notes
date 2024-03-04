@@ -1,0 +1,65 @@
+ Make a comparison between Power BI and Tableau with respect to features like visualization, user friendliness etc.
+ What are the major power components available in Power BI?
+ What are the extra features of Power BI that are not available in MS Excel?
+ What are the limitations of traditional reporting tools as compared to Power BI?
+ What are the requirements to access dashboards and reports in power BI?
+ With power BI services how data is stored in cloud? How can one access data? 
+ While sharing the dashboard with other users, do I need to share data too if it is stored in cloud?
+ Can number of people collaborate together at a time while designing dashboards/reports in power BI?
+ 
+ 
+ What are the different filters available in power BI? Explain the role of each filter.
+How can Slicer act like filter while creating reports in power BI?
+We have a dataset containing sales details of various categories. To know the contribution of different sales categories, which visualization is most suitable?
+What are the advantages of combining power BI with GPT?
+How can power BI and ChatGPT be integrated?
+Give the steps to change data types of an attribute and remove erroneous rows from the table in Power BI.
+ 
+ 
+ What are the different business scenarios be implemented through Power BI?
+What are the different factors need to be considered while designing business requirement?
+Give sample requirements for Project management dashboard.
+which type of business requirement can be and cannot be implemented using Power BI? Give an example.
+Is it possible in Power BI to implement Predictive modeling requirement? If no, give reason.
+
+
+
+How can query editor be useful for data transformation? Is there any other way to do it in power BI?
+What is main purpose of gateways and portal in Power BI?
+What are the major differences between Free version and pro version of Power BI with respect to features? What are the common features available in free and pro versions?
+What is the best situation to use scatter chart in visualization? Give an example.
+In query editor, if I want to undo few operations then is it possible? How?
+How can data aggregation be done at the query level and the report level?
+What is need of Append queries in Power BI? Give a sample use case for appending the tables.
+
+
+Use the following prompts in ChatGPT to explore more.
+
+In card visualization, the price value is not in the currency format. What steps are to be followed to make them appear in currency format?
+What is difference between table chart and Matrix chart? Give some use cases for both the charts.
+There is a requirement of comparing trends of Internet Sales and Reseller sales. Which chart is best suitable in this situation?
+
+
+
+What is a multi-row card visualization in Power BI? How it differs from simple Card visualization?
+How can I customize the appearance of a multi-row card?
+Can we use multiple tables in multi-row card to display data?
+How can I summarize data in a matrix visualization? Give an example.
+
+
+
+Can we have radial gauge visualization in free version of Power BI? How do we get it in Power BI?
+How to merge few columns together using query editor? Give steps to perform this with an example.
+How to merge columns in power BI? Give steps to perform this with an example.
+The bar chart is not showing data labels in the percentage format. How to resolve the issue?
+ 
+ 
+ Can we synchronize the slicer for few dashboards at a time. Give steps to do this with an example.
+While publishing the report on PowerBI.com, what are all things I should take care of?
+Does report publication in power BI require the data set to be shared with other users? Why?
+Is it possible for users to customize the dashboard according to their preferences? How?
+If the owner of a report changed the dataset then are these changes reflected on the dashboard? 
+What are the different ways to share dashboard/report to other team members?
+How self-service BI is beneficial to the organization?
+What are the different self-service BI reporting tools available in the market?
+ 

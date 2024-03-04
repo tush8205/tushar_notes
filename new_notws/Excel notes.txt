@@ -1,0 +1,406 @@
+EXCEL 
+Building Block of Excel funcction 
+
+3 parts of an excel funcction
+   = Function Name (Argument)
+   
+eg.
+     =SUM(B3:B9)
+	 
+	 
+autosum shortcut :
+  alt +  ' =	' 
+  
+  
+to add row and column:
+control shift + button
+
+to remove the rows and column 
+control - button 
+	 
+	 
+1.VBA VISUAL BASIC  FOR APPLICATION 
+2.VBA IS AN OBJECT ORIENTED PROGRAMMING LANGUAGE
+ RANGE = OBJECT 
+PROPRTIES 
+   ADDRESS
+   COLUMN
+	ROW
+	FONT
+METHOD
+  COPY 
+  CUT 
+ DELETE 
+3.VBA PROCEDURE CODE IS STORED IN MODULES 
+
+EXCEL IS COLLECTION OF VARIOUS OBJECTS 
+   WORKBOOK , WORKSHEETWS, CHARTS , PIVOT TABLE 
+   
+VBA ALLOWS USER TO COMMMUNICATE / MANIPLATE EXCLE OBJECT 
+
+
+ActiveWorkbook.ActiveSheet.Name = "Weekly Sales"
+
+?ActiveWorkbook.Name
+Book1
+?ActiveWorkbook.ActiveSheet.Name
+Sheet1
+
+ActiveWorkbook.ActiveSheet.Name = "Weekly Report"
+
+ActiveSheet.Range("A1").Value = "Shizuka"
+
+========================================
+: for mes box 
+Public Sub FunWithVBAProcedures()
+    ' This is VBA Commment
+    
+    ActiveSheet.Range("A1").Value = "Hello World"
+    
+    
+    MsgBox ("Hello World")
+     
+ ::
+ 
+ Public Sub FunWithVBAProcedures()
+    ' This is VBA Commment
+    
+    ActiveSheet.Range("A1").Value = "Hello Shizuka"
+    
+    
+    MsgBox (ActiveSheet.Range("A1").Value)
+    
+================================================================
+dim ==(dimanetion) :for assign the variable 
+& it is used for combinning the value 
+
+Public Sub NoVariables()
+MsgBox ("Hello tushar! You are 26 year old")
+MsgBox ("tushar, you were born in " & Year(Now()) - 26)
+MsgBox ("tushar, in 10 year you will be 36 year")
+
+
+End Sub
+
+Public Sub FunWithVariable()
+' Add Variables
+Dim userName As String ' This is a string (text)
+Dim userAge As Integer ' This is a numeric
+
+        
+userName = "Nobita"
+userAge = 26
+
+MsgBox ("Hello " & userName & "! You are 26 year old")
+MsgBox (userName & ", you were born in " & Year(Now()) - 26)
+MsgBox (userName & ", in 10 year you will be 36 year")
+
+
+End Sub
+=======================================================
+Public Sub FunWithVariable()
+' Add Variables
+Dim userName As String ' This is a string (text)
+Dim userAge As Integer ' This is a numeric
+
+        
+userName = "Nobita"
+userAge = 26
+
+MsgBox ("Hello " & userName & "! You are " & userAge & " year old")
+MsgBox (userName & ", you were born in " & Year(Now()) - 26)
+MsgBox (userName & ", in 10 year you will be 36 year")
+
+
+End Sub
+===========================================================
+IF Else Condition 
+  
+Public Sub FunwithLogic()
+' IF Logic to detemine age
+  If ActiveCell.Value >= 90 Then
+     MsgBox ("User is 90 or older")
+  ElseIf ActiveCell.Value >= 20 Then
+      MsgBox ("user is 20 or older")
+  Else
+    MsgBox ("Not Allowed!")
+  End If
+   
+ 
+End Sub
+========================================================
+ Select Case  statement
+ Public Sub FunWithSelect()
+    Select Case ActiveCell.Value
+        Case Is > 90
+            MsgBox (">90")
+        Case 21 To 89
+            MsgBox (">21")
+        Case Else
+            MsgBox ("Not Allowed!")
+    End Select
+    
+End Sub
+===============================================
+Loops 
+Public Sub FunWithLoops()
+Dim i As Integer
+i = 1
+Do While i <= 10
+    ' Call the procedure called FunWithLogic
+    FunwithLogic
+    ' move one cell down for each loop
+    ActiveCell.Offset(1, 0).Select
+    
+    ' increase the variable , i , by 1 each time it loops
+    i = i + 1
+    Loop
+End Sub
+
+
+
+Without adding condition 
+ Public Sub FunWithLoop()
+    Do While ActiveCell.Value <> ""
+        FunwithLogic
+    
+        ActiveCell.Offset(1, 0).Select
+    
+    
+    Loop
+End Sub
+
+ 
+Loop with selection 
+Public Sub FunWithLoop()
+    Dim user As Range
+    
+    For Each user In Selection
+    ' Do While ActiveCell.Value <> ""
+        FunwithLogic
+    
+        ActiveCell.Offset(1, 0).Select
+    
+    Next user
+    
+   ' Loop
+   
+End Sub
+
+
+Public Sub FunWithLoop()
+    Dim i As Integer
+    ' For i = 1 To 10
+    For i = 1 To ActiveSheet.UsedRange.Rows.Count - 1
+    
+    
+    
+        FunwithLogic
+    
+        ActiveCell.Offset(1, 0).Select
+    Next i
+End Sub
+===============================================================
+VBA SORT METHOD 
+:=   assigning oprators 
+Sorts a Range of value
+SYNTAX
+
+expression.Sort(Key1(range of column),Order2(range of colum assend or desend),Key2,Type,Order2,Order3,Header(contian header)
+==========
+Public Sub DivisionSort()
+' Sort ths list by Division
+    Columns("A:F").Sort key1:=Range("A2"), order1:=xlAscending, Header:=xlYes
+    
+End Sub
+Public Sub CategorySort()
+' Sort ths list by Category
+    Columns("A:F").Sort key1:=Range("B2"), order1:=xlAscending, Header:=xlYes
+    
+End Sub
+
+Public Sub TotalSort()
+' Sort ths list by Category
+    Columns("A:F").Sort key1:=Range("F2"), order1:=xlAscending, Header:=xlYes
+    
+End Sub
+=============
+userInput 
+
+Public Sub FunWithInputBox()
+' get input from user
+Dim userinput As String
+userinput = InputBox("what is your Favorite Color?", "Favorite Color")
+
+MsgBox (userinput)
+
+End Sub
+
+=============
+vbcrlf( visual basic charcter line filed )
+
+Public Sub UserSortInput()
+' get the sort order from the user
+    Dim sortOrder As Integer
+    Dim promptMsg As String
+    
+    promptMsg = "How would you like to Sort the List?" & vbCrLf & _
+    "1 - Sort by Division" & vbCrLf & _
+    "2 - Sort by Category" & vbCrLf & _
+    "3 - Sort by Total"
+    
+    sortOrder = InputBox(promptMsg, "Sort Order")
+    
+    If sortOrder = 1 Then
+        DivisionSort
+    ElseIf sortOrder = 2 Then
+        CategorySort
+    ElseIf sortOrder = 3 Then
+        TotalSort
+    End If
+    
+    
+
+End Sub
+=============
+full code :
+*/
+ Public Sub FunWithInputBox()
+' get input from user
+Dim userinput As String
+userinput = InputBox("what is your Favorite Color?", "Favorite Color")
+
+MsgBox (userinput)
+
+End Sub
+
+Public Sub UserSortInput()
+' get the sort order from the user
+    Dim sortOrder As Integer
+    Dim promptMsg As String
+    
+    promptMsg = "How would you like to Sort the List?" & vbCrLf & _
+    "1 - Sort by Division" & vbCrLf & _
+    "2 - Sort by Category" & vbCrLf & _
+    "3 - Sort by Total"
+    
+    sortOrder = InputBox(promptMsg, "Sort Order")
+    
+    If sortOrder = 1 Then
+        DivisionSort
+    ElseIf sortOrder = 2 Then
+        CategorySort
+    ElseIf sortOrder = 3 Then
+        TotalSort
+    End If
+    
+    
+
+End Sub
+
+
+Public Sub DivisionSort()
+' Sort ths list by Division
+    Columns("A:F").Sort key1:=Range("A2"), order1:=xlAscending, Header:=xlYes
+    
+End Sub
+Public Sub CategorySort()
+' Sort ths list by Category
+    Columns("A:F").Sort key1:=Range("B2"), order1:=xlAscending, Header:=xlYes
+    
+End Sub
+
+Public Sub TotalSort()
+' Sort ths list by Total
+    Columns("A:F").Sort key1:=Range("F2"), order1:=xlAscending, Header:=xlYes
+    
+End Sub
+/*
+
+======================
+invalid Opton 
+ 
+ 
+Public Sub UserSortInput()
+' get the sort order from the user
+    Dim sortOrder As Integer
+    Dim promptMsg As String
+    Dim tryAgain As Integer
+    
+    
+    promptMsg = "How would you like to Sort the List?" & vbCrLf & _
+    "1 - Sort by Division" & vbCrLf & _
+    "2 - Sort by Category" & vbCrLf & _
+    "3 - Sort by Total"
+    
+    sortOrder = InputBox(promptMsg, "Sort Order")
+    
+    If sortOrder = 1 Then
+        DivisionSort
+    ElseIf sortOrder = 2 Then
+        CategorySort
+    ElseIf sortOrder = 3 Then
+        TotalSort
+    Else
+        tryAgain = MsgBox("Invalid Option! Try Again", vbYesNo)
+        
+        If tryAgain = 6 Then
+            UserSortInput
+        End If
+    End If
+End Sub
+=====
+ErrHandeler 
+
+
+Public Sub UserSortInput()
+' get the sort order from the user
+    Dim sortOrder As Integer
+    Dim promptMsg As String
+    Dim tryAgain As Integer
+    
+    On Error GoTo errHandler
+    
+    promptMsg = "How would you like to Sort the List?" & vbCrLf & _
+    "1 - Sort by Division" & vbCrLf & _
+    "2 - Sort by Category" & vbCrLf & _
+    "3 - Sort by Total"
+    
+    sortOrder = InputBox(promptMsg, "Sort Order")
+    
+    If sortOrder = 1 Then
+        DivisionSort
+    ElseIf sortOrder = 2 Then
+        CategorySort
+    ElseIf sortOrder = 3 Then
+        TotalSort
+    Else
+errHandler:
+        tryAgain = MsgBox("Invalid Option! Try Again", vbYesNo)
+        
+        If tryAgain = 6 Then
+            UserSortInput
+        End If
+    End If
+End Sub
+==============
+
+Autosum 
+
+
+Public Sub AutomateTotalSum()
+    Dim lastcell As String  
+    Range("F2").Select
+    Selection.End(xlDown).Select
+    lastcell = ActiveCell.Address( for absolute reference $F$23 like )
+End Sub
+
+
+Public Sub AutomateTotalSum()
+    Dim lastcell As String
+    Range("F2").Select
+    Selection.End(xlDown).Select
+    lastcell = ActiveCell.Address(False, False)( for releative reference)
+End Sub
+
+================================
