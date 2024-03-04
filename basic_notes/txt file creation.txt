@@ -1,0 +1,17 @@
+load data
+CHARACTERSET UTF8
+INFILE './customer.txt'
+BADFILE './customer.txt_par.bad'
+DISCARDFILE './customer.txt_par.dsc'
+Append
+INTO TABLE migadm.customer
+FIELDS TERMINATED BY '|'
+TRAILING NULLCOLS
+(
+emp_id , 
+cust_id ,
+cust_first_name ,
+cust_last_name ,
+cust_phoneNum ,
+cust_age ,
+cust_current_status )   

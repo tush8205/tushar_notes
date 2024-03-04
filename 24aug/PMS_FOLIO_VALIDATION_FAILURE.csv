@@ -1,0 +1,7 @@
+FILE_NAME,ERR_NUMBER,ERR_MSG,ERR_TIME,ERR_ENTITY,ERR_REMARK
+demo_failure,23345,scheme_code and issuer_id combination not present,24-08-2022,PMS000000041,combination not present
+demo_failure,23345,scheme_code and issuer_id combination not present,24-08-2022,PMS000000044,combination not present
+demo_failure,23345,scheme_code and issuer_id combination not present,24-08-2022,PMS000000045,combination not present
+demo_failure,23345,scheme_code and issuer_id combination not present,24-08-2022,PMS000000041,combination not present
+demo_failure,23345,scheme_code and issuer_id combination not present,24-08-2022,PMS000000046,combination not present
+demo_failure,23345,scheme_code and issuer_id combination not present,24-08-2022,PMS000000046,combination not present

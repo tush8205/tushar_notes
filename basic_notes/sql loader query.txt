@@ -1,0 +1,26 @@
+sqlldr control=customer.ctl,userid=system@FWMDIG,log=customer.log,bad=customer.bad,errors=9999999999;
+password: manager
+
+
+sqlldr control=PMS_FOLIO.ctl,userid=system@FWMDIG,log=PMS_FOLIO.log,bad=PMS_FOLIO.bad,errors=9999999999;
+sqlldr control=  .ctl , userid=migdam@FWMMIG , log=   .log ,bad=   .bad , errors=9999999999;
+password=migadm
+
+
+
+winSCP PATH :-   /home/e1071396/MIG/tushar   >>> LOCAL TO SERVER   >>GO TU PUUTY RUN IT 
+                 /home/e1071396/MIG           >>> CRETINING THE FILE  >>>  SERVER TO LOCAL 
+				 
+				 
+				 
+				 
+				 
+				 
+				 
+				 
+				 
+				 
+				 
+				 
+				 
+			

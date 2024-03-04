@@ -1,0 +1,26 @@
+select * from migadm.customer;
+select * from MIGADM.employee;
+SELECT * FROM migadm.cutomer_address;
+--delete from migadm.customer_address;
+--alter table migadm.customer_address RENAME COLUMN state TO state_name;
+alter table migadm.cutomer_address add address varchar(20);
+alter table migadm.employee add address varchar(20);
+
+--drop table migadm.customer_address;
+
+variable varchar(8000)
+
+variable := i.EMPID || ','||i.cust_id||','||
+101,111,nagendra,mishra,865856565,24,employed
+create table migadm.cutomer_address( 
+emp_id varchar(20),
+cust_id varchar(20),
+first_name varchar(20),
+last_name varchar(20),
+mobile_no varchar(20),
+age varchar(10),
+status varchar(20) );
+
+
+   
+    select * from migadm.mig_err_log where file_name='demo1_failure' and err_time='20-08-2022';

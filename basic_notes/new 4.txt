@@ -1,0 +1,12 @@
+create table emp(
+emp_id varchar(10) not null,
+emp_name varchar(20)
+);
+insert into emp values ('123','tush');
+insert into emp values ('345','tush');
+insert into emp values ('567','tush');
+insert into emp values ('789','tush');
+insert into emp values ('987','tush');
+insert into emp values ('765','tush');
+insert into emp values ('','tush');
+insert into emp values ('123','tush');

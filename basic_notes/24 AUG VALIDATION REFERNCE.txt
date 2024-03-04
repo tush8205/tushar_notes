@@ -1,0 +1,30 @@
+CURSOR C1 IS
+16:35:05   4  SELECT * from migadm.pms_folio_mapp;
+16:35:05   5  lv_errm VARCHAR2(200);
+16:35:05   6  lv_errcode NUMBER;
+16:35:05   7  v_count NUMBER;
+16:35:05   8
+16:35:05   9  BEGIN
+16:35:05  10  FOR i in C1
+16:35:05  11  LOOP
+16:35:05  12      BEGIN
+16:35:05  13  v_count:=0;
+16:35:05  14     BEGIN
+16:35:05  15  select count(1) into v_count from migadm.PMS_MASTER_REF where PRODUCT_CODE=i.SCHEME_CODE AND PRODUCT_ISSUER=i.ISSUER_ID;
+16:35:05  16      END;
+16:35:05  17  IF (v_count>0)THEN
+16:35:05  18     BEGIN
+16:35:05  19      update migadm.pms_folio_mapp set mig_flg='Y',mig_date=sysdate  where SCHEME_CODE=i.SCHEME_CODE AND ISSUER_ID=i.ISSUER_ID;
+16:35:05  20  EXCEPTION WHEN OTHERS THEN
+16:35:05  21  lv_errm := SQLERRM;
+16:35:05  22  lv_errcode := SQLCODE;
+16:35:05  23  insert into MIGADM.mig_err_log values ('demo_failure',lv_errcode,lv_errm,sysdate,i.SCHEME_CODE ,'record not updated');
+16:35:05  24     END;
+16:35:05  25     ELSE
+16:35:05  26  update migadm.pms_folio_mapp set mig_flg='N',mig_date=sysdate  where SCHEME_CODE=i.SCHEME_CODE AND  ISSUER_ID=i.ISSUER_ID ;
+16:35:05  27  insert into MIGADM.mig_err_log values ('demo_failure',23345,'scheme_code and issuer_id combination not present',sysdate,i.SCHEME_CODE,'combination not present');
+16:35:05  28     END IF;
+16:35:05  29  END;
+16:35:05  30  END LOOP;
+16:35:05  31  COMMIT;
+16:35:05  32  END;

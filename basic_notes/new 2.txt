@@ -1,0 +1,16 @@
+load data
+CHARACTERSET UTF8
+INFILE './customer_address.txt'
+BADFILE './customer_address.txt_par.bad'
+DISCARDFILE './customer_address.txt_par.dsc'
+Append
+INTO TABLE migadm.customer_address
+FIELDS TERMINATED BY '|'
+TRAILING NULLCOLS
+(
+cust_id,
+address,
+pin_code,
+city,
+state
+)   

@@ -1,0 +1,79 @@
+.bash_profile
+
+
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+[e1223824@evosfncll144 e1071396]$ cat .bash_profile
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export PATH
+
+export JAVA_HOME=/HDFCTEST_FE/jdk1.8.0_141
+
+export ORACLE_BASE=/HDFCDEV_DB/app/oracle
+export ORACLE_HOME=$ORACLE_BASE/product/12.1.0/db_home
+export ORACLE_SID=HDFCWM
+
+export PATH=/usr/sbin:$PATH
+export PATH=$ORACLE_HOME/bin:$PATH
+
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
+export CLASSPATH=$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+export TBA_PROD_ROOT=/HDFCDEV_BE/BE/Finacle/FC/app
+export TBA_E=/HDFCDEV_BE/BE/Finacle/FC/app/prodbase/exe
+export POI_API_PATH=$TBA_PROD_ROOT/prodbase/lib/UPLOADJARS/poi-3.7-20101029.jar
+
+alias l='ls -luart'
+alias cut='cd /HDFCDEV_FE/commonroot/CUT'
+
+alias FDM='cd /HDFCDEV_FE/commonroot/CUT/FDM+'
+alias cdci='cd /HDFCDEV_BE/BE/Finacle/FC/app/CDCI_LOGS'
+alias core='cd /HDFCDEV_BE/BE/Finacle/FC/app/services/coresession/bin'
+alias finl='cd /HDFCDEV_BE/BE/Finacle/FC/app/services/finlistval/bin'
+
+alias finrptc='cd /HDFCDEV_BE/BE/comnclnt/FINRPT/services/finrptsrvr/bin'
+alias finrptf='cd /HDFCDEV_BE/BE/finlstclnt/FINRPT/services/finrptsrvr/bin'
+
+alias jboss='cd /HDFCDEV_FE/commonroot/CUT/FDM+/scripts/jbosseapscripts'
+alias jlog='cd /HDFCDEV_FE/Jboss-7.1.2/standalone/log'
+alias url='curl -k https://evosfncll144.ad.infosys.com:7600/fininfra/ui/SSOLogin.jsp'
+alias common='cd /HDFCDEV_FE/FE/common/log'
+alias mtree='cd /HDFCDEV_FE/FE/FinacleApps/finbranch.war/mtree'
+alias startjboss=' ./startJBossStandalone.sh /HDFCDEV_FE/FE/common/config/install/fdm_inputs.cfg '
+alias stopjboss=' ./stopJBossStandalone.sh /HDFCDEV_FE/FE/common/config/install/fdm_inputs.cfg '
+alias cscr='cd /HDFCDEV_BE/BE/Finacle/FC/app/cust/01/INFENG/scripts'
+alias csql='cd /HDFCDEV_BE/BE/Finacle/FC/app/cust/01/INFENG/sql'
+alias ccom='cd /HDFCDEV_BE/BE/Finacle/FC/app/cust/01/INFENG/com'
+alias pmrt='cd /HDFCDEV_BE/BE/Finacle/FC/app/cust/01/INFENG/mrt'
+alias scr='cd /HDFCDEV_BE/BE/Finacle/FC/app/cust/01/INFENG/scripts'
+alias cjsp='cd /HDFCDEV_FE/FE/FinacleApps/finbranch.war/custom/jsp'
+alias uxml='cd /HDFCDEV_BE/BE/Finacle/FC/app/prodbase/INFENG/uxml'
+alias pscr='cd /HDFCDEV_BE/BE/Finacle/FC/app/prodbase/INFENG/scripts'
+alias pcom='cd /HDFCDEV_BE/BE/Finacle/FC/app/prodbase/INFENG/com'
+alias pmrt='cd /HDFCDEV_BE/BE/Finacle/FC/app/prodbase/INFENG/mrt'
+alias psql='cd /HDFCDEV_BE/BE/Finacle/FC/app/prodbase/INFENG/sql'
+alias pjasper='cd /HDFCDEV_BE/BE/Finacle/FC/app/prodbase/INFENG/jasper'
+alias pjrxml='cd /HDFCDEV_BE/BE/Finacle/FC/app/prodbase/INFENG/jrxml'
+export FILEUPLOAD_JLIMO_PORTNUM=16203
+alias ccom='cd /HDFCDEV_BE/BE/Finacle/FC/app/cust/01/INFENG/com'
+alias cjasper='cd /HDFCDEV_BE/BE/Finacle/FC/app/cust/01/INFENG/jasper'
+alias cjrxml='cd /HDFCDEV_BE/BE/Finacle/FC/app/cust/01/INFENG/jrxml'
+. /etc/b2k/HDFCWM/FINCORE/01/com/commonenv.com

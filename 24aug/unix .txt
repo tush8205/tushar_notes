@@ -1,0 +1,162 @@
+WORK WITH FILES === ls,rm 
+WORK WITH DIRECTORIES === mkdir-newly crate directory , rmdir--delete an empty directory ,cd,pwd 
+WORK WITH THE OTHER TOOLS === cal ,
+bc-- arbitray precison calculator [bc  12*12],
+who-- user who have remotly logged into th unix[who -m,-a,-q,-H,-b]
+uname--[uname -o ::operating sys,-p:: processer,-s::kernal name,-n::network node hostname,-r:: kernel release,-v::kernal version]
+echo,printf,clear,
+tty-- terminal info
+,which,type,cat
+man == used for reference manual for details information about any command in unix 
+cal == print the calender of the current month
+[ cal -y  :: display current year
+cal -1   :: current month
+cal -m    :: display monday as the first day of the week 
+cal -s      :: display sunday as the first day of the week
+cal -j      :: to display julian dates 
+cal -3        :: display previous /current/next month calender
+cal 01 07 1997]
+   
+   
+ date :: print current date
+ date +"%a %d %b %Y"
+%a- abbreviated weekday name 
+%d- day of month 
+%b -  abbreviated month name
+%Y - year
+
+date + "%_" 
+
+
+
+
+** tail  --list bottom n record
+ tail [OPTION]... [FILE]..
+ -n , -c , -f :follow change in file ,-s :sleep interval  
+ and 
+ head-- list top n record
+head [OPTION]... [FILE]...
+option -- [-n :no of line, -c :no of byte ]  
+ 
+
+Recent 10 search requests made by the users
+First 10 search requests made by the users
+
+
+
+** cut 
+ extract part of each line of  file . it cuts out a set of byte or characters or fielda from each row of the file based on the delimiter
+ 
+ 
+ **Comm command
+ comm [option]... FILE1 FILE2
+ Comm command compares two sorted files line by line and 
+ produces three column output when no options were passed to it. 
+ Column one contains lines unique to file1, column two contains lines unique to file2, and column three contains lines common to both files.
+
+** diff command
+The command "diff" compare files line by line.
+ This command becomes helpful when you wish to know the exact record level differences. 
+ It tries to determine the smallest set of deletions and insertions between files. 
+ Typically, diff is used to show the changes between two versions of the same file.
+
+diff [OPTION]... FILES
+-i -- disregards the case differences
+-c -- to compare two program code differences
+-q  -- reports whether files differ or not 
+
+
+NOTE:Line numbers from the first file
+A letter (a for add d for delete c for change)
+Line numbers from the second file
+So, 1,2c1 means that the lines from 1,2 in first file need to be changed to match the line number 1 in second file.
+
+The second and third lines in the above output are the lines from first file followed by a separator and 
+then the next line is from second file.
+Lines preceded by "<" are lines from the first file
+Lines preceded by ">" are lines from the second file
+
+
+! symbol prefixed to few lines where the change is expected
++ symbol prefixed to lines indicates that this line in second file, needs to be added to the first file
+-  symbol Indicates a line in the first file that needs to be deleted
+Tryout: Try comparing 2 files using cmp command and observe the format of output.
+
+
+uniq - Removing the repeated lines 
+ used to remove / eliminate the repeated occurrence of consecutive lines from a file .\
+ if same file is present in the file more than once , but not consecutive it will be considered as two unique lines and hence not removed.
+-u  = selecting non repeates lines 
+-d = selecting the duplicate lines
+-c = counting the frequency of occurrence
+
+
+ACCESS PERMISSION 
+requirements  has to be taken care 
+A user should not be able to make change to the files created by another user
+A user should not be able to delete the files created by another user 
+
+
+three access permission 
+Read 
+Write 
+Execute 
+
+
+Umask 
+used to computing the file permission for newely createdfile 
+
+
+
+Data Backup 
+take backup -- 
+cp== copy a file one to anothr directory
+ cp [OPTION]... SOURCE... DIRECTORY
+
+
+,mv== move or rename files 
+ mv [option]...SOURCE...DIRECTORY,
+tar,cpio
+Moving files to another partition-- mv
+archive the files -- tar 
+Recovering data from backup -- tar , cpio
+
+
+
+Archiving files 
+tar - command saves many files together into a single archive and can redtore individual fiels from the archive 
+tar [option]...[file]..
+-c = creat
+-t= list all files 
+-x= Extrct all 
+-v = Verbose
+-z= Create a Zip file 
+-r = Append 
+-cvf= Create archive from file
+-tvf= List all files in archive.tar verbosrly 
+-xf = Extrct all file from archive.tar
+-cvf = crate a tar archive files 
+-cvzf = create a compressed gzip archive files 
+-rvf = Append a file to existing archive
+/%s  
+
+
+
+cpio- used to creating archive and extrcting files that are arechived and also use to copy one location to another .
+-ov = crate an archive 
+-idv= extract files from archive
+-F = CREATING / extracting tar archive files
+-it = List the files in archive 
+
+
+vi == open file 
+:w == save changes
+:wq == save change and exit 
+:q == exit from editor
+:q! == exit from editor and discard changes made 
+:/_____ == direct search word 
+
+:1,3co5   == to copy lines from 1 to 3 and paste them after line 5.
+:1,4w abc.txt == write line 1 to 4 file abc.txt
+:1,4r abc.txt == read line 1 to 4 a file abc.txt
+

@@ -1,0 +1,55 @@
+DOMESTIC MIGRATION::
+ DB connection = .56
+ To access sql + ctl files in backend = .54
+ Generated / Extracted files = .56
+ Bank sharing data = .50
+1. To get the bank file (.50) into your local area.
+2. Transfer it to .54 server (n-- records) & remove the ^M characters.
+   2.1 to load (.ctl) it top staging area (MIGADM) (++check count) (n-- records)
+3.if validation - to be run
+4.Extract the records available in staging area (MIGADM TABLE) --> .56 server (n--records)(++check count)
+5.upload this file in front end with corresponding menu only in user1
+6.verify uploaded file in user2 ( the process of validating + inserting the records into product area)
+7.Monitor the .com file in the backend (Success record + Failure record in production -- Finacle/TBAADM)
+8.Success report (90) + Failure report(10)
+9.error 1 : 'error statement'
+
+Explanation:
+Sample record: unique refernce , column data,
+valid values for the column
+place the failure logs in  .50 server ++permission +snip
+Email the observation along with snip to bank.
+ ---------
+ 
+ 
+ 
+ 
+ 
+putty command 
+vi :- read & write
+view :- read only 
+cat -v [sourcefile] > [sourcefile_1.txt/csv]
+l :- to list 
+l *.[ext] - list the files in same extension
+cd [directory] - change directory]
+pwd - path working directory
+esc + :q - exit
+esc + :qa! - exit without saving 
+esc + :wq - write the changes and exit 
+esc + /[string] - search the straing pattern
+esc + se nu - line number 
+esc + se ic - make the string case sensitive 
+esc + :n - to view the next file 
+migadm - to connect db 
+chmod [filename] 777 - change the permission to 777
+DO NOT TRY :: rm * - remove everything ::
+for change directory : su - finapp
+
+
+
+
+
+
+  TO RUN CTL File :
+  sqlldr control=FATCA_Demo_purpose.ctl,userid=migadm@FWMMIG,log= FATCA_Demo_purpose.log , bad=FATCA_Demo_purpose.bad, errors=9999999;
+  password : migadm

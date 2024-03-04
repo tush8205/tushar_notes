@@ -1,0 +1,41 @@
+spool Ins_COBM_DOM.log;
+set time on timing on echo on;
+alter session set nls_date_format='DD-MM-YYYY';
+
+--CREATE OR REPLACE PROCEDURE MIGADM.INS_COBM_DOM
+--AS
+DECLARE
+CURSOR C1 IS
+SELECT * FROM migadm.customer;
+lv_errm VARCHAR2(200);
+lv_errcode NUMBER;
+
+
+BEGIN
+FOR i in C1
+LOOP
+BEGIN
+IF i.mig_flg='Y' then 
+begin
+INSERT into migadm.cutomer_address (cust_id ,first_name,last_name,mobile_no,age,status) values(i.cust_id ,i.cust_first_name,i.cust_last_name,i.cust_phonenum,i.cust_age,i.cust_current_status);                
+EXCEPTION WHEN OTHERS THEN
+lv_errm := SQLERRM;
+lv_errcode := SQLCODE;
+insert into MIGADM.mig_err_log values ('demo1_failure',lv_errcode,lv_errm,sysdate,i.cust_id,'record not inserted');
+end;
+end if;
+
+
+
+END;
+END LOOP;
+COMMIT;
+END;
+
+/
+
+spool off;
+
+
+
+select * from migadm.cutomer_address ;
